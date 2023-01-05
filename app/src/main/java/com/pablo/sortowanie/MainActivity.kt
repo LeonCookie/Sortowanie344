@@ -3,9 +3,9 @@ package com.pablo.sortowanie
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.processNextEventInCurrentThread
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
                     arr[i] = arr[i + 1]
                     arr[i + 1] = temp
                     swapped = true
-                  //  Progress1++
-                    //ProgressBar1.progress = Progress1
+
+
 
                 }
             }
@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         EditTxt = findViewById(R.id.editTextNumber)
         ListaPrzed = findViewById(R.id.listViewPrzed)
         ListaPo = findViewById(R.id.listViewPo)
+        ProgressBar1 = findViewById(R.id.progressBar)
+
         BtnStart.setOnClickListener {
             if(EditTxt.text.isNotEmpty()){
                 ArraySize = EditTxt.text.toString().toInt()
@@ -55,6 +57,12 @@ class MainActivity : AppCompatActivity() {
 
                 var Tablica = IntArray(ArraySize)
 
+                ProgressBar1.setVisibility(View.VISIBLE);
+                try {
+                    Thread.sleep(1000)
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
 
 
                 for(i in 0..ArraySize-1){
@@ -73,20 +81,17 @@ class MainActivity : AppCompatActivity() {
                 PoTablica = Tablica
 
 
-               //ProgressBar1.max= ArraySize
-               // Progress1 = 0
 
 
 
                 bubbleSort(PoTablica)
 
+
               val ListAf = PoTablica.toList()
                 val adapter1 = ArrayAdapter(this, android.R.layout.simple_list_item_1, ListAf)
                ListaPo.adapter = adapter1
 
-
-
-
+               // ProgressBar1.setVisibility(View.INVISIBLE);
 
 
 
@@ -95,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"Prosze uzupełnić dane",Toast.LENGTH_SHORT)
 
             }
+
         }
     }
 
